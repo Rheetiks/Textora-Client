@@ -3,6 +3,14 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
+# Define build arguments for environment variables
+ARG VITE_API_URL
+ARG VITE_PARTYKIT_HOST
+
+# Set environment variables during the build process
+ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_PARTYKIT_HOST=$VITE_PARTYKIT_HOST
+
 # Copy package.json and package-lock.json / yarn.lock
 COPY package*.json ./
 
