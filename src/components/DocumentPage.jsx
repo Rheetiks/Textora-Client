@@ -25,7 +25,7 @@ const DocumentPage = () => {
   const PARTYKIT_URL = import.meta.env.VITE_PARTYKIT_HOST || "http://localhost:8080";
 
   const [editor, setEditor] = useState(null);
-  const [username, setUsername] = useState(faker.internet.username());
+  const [username, setUsername] = useState(faker.internet.username().slice(0, 20));
   const [color] = useState(randomColor());
   const [connectedUsers, setConnectedUsers] = useState([]);
   const [connectionStatus, setConnectionStatus] = useState("connected");
