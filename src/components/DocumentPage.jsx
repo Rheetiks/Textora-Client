@@ -16,6 +16,7 @@ import Loader from "./Loader";
 import "./styles.scss";
 import randomColor from "randomcolor";
 import { Link } from "react-router-dom";
+import copy from "copy-to-clipboard";
 
 const DocumentPage = () => {
   const { docId } = useParams();
@@ -27,19 +28,19 @@ const DocumentPage = () => {
   const [username, setUsername] = useState(faker.internet.username());
   const [color] = useState(randomColor());
   const [connectedUsers, setConnectedUsers] = useState([]);
-  const [connectionStatus, setConnectionStatus] = useState("connecting");
+  const [connectionStatus, setConnectionStatus] = useState("connected");
   const [isDocNotFound, setIsDocNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const [copyButtonText, setCopyButtonText] = useState("Share");
 
   const providerRef = useRef(null);
   const yDocRef = useRef(new Y.Doc());
+  
 
   const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopyButtonText("Copied!");
-      setTimeout(() => setCopyButtonText("Share"), 2000);
-    }).catch(err => console.error("Failed to copy URL: ", err));
+    copy(window.location.href); // copies the current URL to clipboard
+    setCopyButtonText("Copied!");
+    setTimeout(() => setCopyButtonText("Share"), 2000);
   };
 
   const handleToggleMenu = () => {
@@ -120,7 +121,6 @@ const DocumentPage = () => {
     };
 
     wsProvider.on("status", (event) => {
-      setConnectionStatus(event.status);
       if (event.status === "connected" && !editor) {
         initializeEditor();
       }

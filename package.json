@@ -19,6 +19,7 @@
     "@tiptap/starter-kit": "^3.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "copy-to-clipboard": "^3.3.3",
     "faker": "^6.6.6",
     "file-saver": "^2.0.5",
     "framer-motion": "^12.23.12",
